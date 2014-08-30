@@ -42,7 +42,8 @@
 
     "autoload": {
         "psr-0": {
-            "PhpSpec": "src/"
+            "PhpSpec": "src/",
+            "Console" : "features/bootstrap/Console"
         }
     },
 
