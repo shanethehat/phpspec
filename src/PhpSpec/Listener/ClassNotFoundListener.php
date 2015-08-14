@@ -13,6 +13,7 @@
 
 namespace PhpSpec\Listener;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use PhpSpec\Console\IO;
 use PhpSpec\Locator\ResourceManagerInterface;
@@ -28,17 +29,23 @@ class ClassNotFoundListener implements EventSubscriberInterface
     private $resources;
     private $generator;
     private $classes = array();
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
 
     /**
      * @param IO $io
      * @param ResourceManagerInterface $resources
      * @param GeneratorManager $generator
      */
-    public function __construct(IO $io, ResourceManagerInterface $resources, GeneratorManager $generator)
+    public function __construct(IO $io, ResourceManagerInterface $resources, GeneratorManager $generator, EventDispatcherInterface $dispatcher)
     {
         $this->io        = $io;
         $this->resources = $resources;
         $this->generator = $generator;
+
+        $this->dispatcher = $dispatcher;
     }
 
     /**

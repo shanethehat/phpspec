@@ -13,16 +13,17 @@ use PhpSpec\Event\SuiteEvent;
 use PhpSpec\Exception\Fracture\ClassNotFoundException as PhpSpecClassException;
 
 use Prophecy\Exception\Doubler\ClassNotFoundException as ProphecyClassException;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ClassNotFoundListenerSpec extends ObjectBehavior
 {
     function let(IO $io, ResourceManager $resourceManager, GeneratorManager $generatorManager,
-                 SuiteEvent $suiteEvent, ExampleEvent $exampleEvent)
+                 SuiteEvent $suiteEvent, ExampleEvent $exampleEvent, EventDispatcherInterface $dispatcher)
     {
         $io->writeln(Argument::any())->willReturn();
         $io->askConfirmation(Argument::any())->willReturn();
 
-        $this->beConstructedWith($io, $resourceManager, $generatorManager);
+        $this->beConstructedWith($io, $resourceManager, $generatorManager, $dispatcher);
     }
 
     function it_does_not_prompt_for_class_generation_if_no_exception_was_thrown($exampleEvent, $suiteEvent, $io)

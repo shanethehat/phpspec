@@ -130,7 +130,8 @@ class ContainerAssembler
             return new Listener\ClassNotFoundListener(
                 $c->get('console.io'),
                 $c->get('locator.resource_manager'),
-                $c->get('code_generator')
+                $c->get('code_generator'),
+                $c->get('event_dispatcher')
             );
         });
         $container->setShared('event_dispatcher.listeners.collaborator_not_found', function (ServiceContainer $c) {
